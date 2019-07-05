@@ -1,0 +1,2 @@
+# MetaboAssayLibToSkylineTransitionListConversion
+Conversion of OpenMS AssayGeneratorMetabo Assay Library to Skyline Transitions List
