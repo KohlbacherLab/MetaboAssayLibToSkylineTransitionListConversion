@@ -58,9 +58,9 @@ def fillTmpTSVWithValidTargetedExp(openmslib, tmpfile):
     return tmpfile
 
 @click.command()
-@click.option('--openmslib', '-in', envvar = 'openmslib', multiple = False, type = click.Path(), help = 'Input assay library from OpenMS::AssayGeneratorMetbo (.tsv,.traML,.pqp)')
-@click.option('--skylinelib', '-out', envvar = 'skylinelib', multiple = False, type = click.Path(), help = 'Output skyline transition list (.tsv)')
-@click.option('--rtwindow', '-rtw', envvar = 'rtwindow', multiple = False, type = float, default = 0.0, help = 'Set precursor retention time window (e.g. 0.6 min); default (0.0) - column will be dropped')
+@click.option('--openmslib', '-in', multiple = False, type = click.Path(), help = 'Input assay library from OpenMS::AssayGeneratorMetbo (.tsv,.traML,.pqp)')
+@click.option('--skylinelib', '-out', multiple = False, type = click.Path(), help = 'Output skyline transition list (.tsv)')
+@click.option('--rtwindow', '-rtw', multiple = False, type = float, default = 0.0, help = 'Set precursor retention time window (e.g. 0.6 min); default (0.0) - column will be dropped')
 
 def main(openmslib, skylinelib, rtwindow):
 
