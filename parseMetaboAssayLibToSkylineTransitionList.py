@@ -61,8 +61,9 @@ def fillTmpTSVWithValidTargetedExp(openmslib, tmpfile):
 @click.option('--openmslib', '-in', multiple = False, type = click.Path(), help = 'Input assay library from OpenMS::AssayGeneratorMetbo (.tsv,.traML,.pqp)')
 @click.option('--skylinelib', '-out', multiple = False, type = click.Path(), help = 'Output skyline transition list (.tsv)')
 @click.option('--rtwindow', '-rtw', multiple = False, type = float, default = 0.0, help = 'Set precursor retention time window (e.g. 0.6 min); default (0.0) - column will be dropped')
+@click.option('--removedecoys/--no-removedecoys', default=True, help = 'Removes the decoys from skyline library (default: True)')
 
-def main(openmslib, skylinelib, rtwindow):
+def main(openmslib, skylinelib, rtwindow, removedecoys):
 
     tmpfile = tempfile.NamedTemporaryFile(suffix='.tsv')
     fillTmpTSVWithValidTargetedExp(openmslib, tmpfile)
@@ -81,10 +82,10 @@ def main(openmslib, skylinelib, rtwindow):
         'TransitionGroupId': 'Note'})
     
     # remove decoys, since there are problems with the import into skyline! 
-    indexDecoys = library[ library['Decoy'] == 1 ].index
-    
-    # delete these row indexes from dataFrame
-    library.drop(indexDecoys, inplace=True)
+    if removedecoys:
+    	indexDecoys = library[ library['Decoy'] == 1 ].index
+    	# delete these row indexes from dataFrame
+    	library.drop(indexDecoys, inplace=True)
     
     # drop unused columns (from AssayGeneratorMetabo output))
     library = library.drop([
